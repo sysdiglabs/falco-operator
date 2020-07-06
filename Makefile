@@ -57,20 +57,3 @@ package-redhat:
 		redhat-certification/sysdig-operator.v${VERSION}.clusterserviceversion.yaml
 	\
 	git checkout redhat-certification
-
-new-upstream: bundle.yaml build push operatorhub package-redhat
-	sed -i "s/^VERSION = .*/VERSION = $(VERSION)/" Makefile
-	git add bundle.yaml
-	git add Makefile
-	git commit -m "New Sysdig helm chart release $(VERSION)"
-	git tag -f v$(VERSION)
-	GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git push origin HEAD:master
-	GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git push --tags -f
-
-operatorhub:
-	mkdir -p deploy/olm-catalog/sysdig-operator/$(VERSION)
-	cp deploy/olm-catalog/sysdig-operator/sysdig-operator.template.clusterserviceversion.yaml deploy/olm-catalog/sysdig-operator/$(VERSION)/sysdig-operator.v$(VERSION).clusterserviceversion.yaml
-	sed -i "s/AGENT_VERSION/$(AGENT_VERSION)/" deploy/olm-catalog/sysdig-operator/$(VERSION)/sysdig-operator.v$(VERSION).clusterserviceversion.yaml
-	sed -i "s/PREVIOUS_VERSION/$(PREVIOUS_VERSION)/" deploy/olm-catalog/sysdig-operator/$(VERSION)/sysdig-operator.v$(VERSION).clusterserviceversion.yaml
-	sed -i "s/VERSION/$(VERSION)/" deploy/olm-catalog/sysdig-operator/$(VERSION)/sysdig-operator.v$(VERSION).clusterserviceversion.yaml
-	git add deploy/olm-catalog/sysdig-operator/$(VERSION)/sysdig-operator.v$(VERSION).clusterserviceversion.yaml
