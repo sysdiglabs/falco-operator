@@ -4,8 +4,8 @@ PREVIOUS_VERSION = $(shell ls -d deploy/olm-catalog/sysdig-operator/*/ -t | head
 VERSION = 1.1.9
 CERTIFIED_IMAGE = registry.connect.redhat.com/sysdig/falco-operator
 
-#CERTIFIED_AGENT_IMAGE = registry.connect.redhat.com/sysdig/agent
-#AGENT_VERSION = 9.9.1
+CERTIFIED_FALCO_IMAGE = docker.io/falcosecurity/falco
+FALCO_VERSION = 0.23.0
 
 .PHONY: build bundle.yaml
 
@@ -39,21 +39,21 @@ e2e-clean: bundle.yaml
 	oc delete -f bundle.yaml
 
 package-redhat:
-	cp deploy/crds/sysdig_v1_sysdig_crd.yaml redhat-certification/sysdig.crd.yaml
-	cp redhat-certification/sysdig-operator.vX.X.X.clusterserviceversion.yaml redhat-certification/sysdig-operator.v${VERSION}.clusterserviceversion.yaml
+	cp deploy/crds/falco.org_falcos_crd.yaml redhat-certification/falco.crd.yaml
+	cp redhat-certification/falco-operator.vX.X.X.clusterserviceversion.yaml redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
 	\
-	sed -i 's|REPLACE_VERSION|${VERSION}|g' redhat-certification/sysdig-operator.v${VERSION}.clusterserviceversion.yaml
-	sed -i 's|REPLACE_IMAGE|${CERTIFIED_IMAGE}|g' redhat-certification/sysdig-operator.v${VERSION}.clusterserviceversion.yaml
-	sed -i 's|REPLACE_AGENT_IMAGE|${CERTIFIED_AGENT_IMAGE}|g' redhat-certification/sysdig-operator.v${VERSION}.clusterserviceversion.yaml
-	sed -i 's|REPLACE_AGENT_VERSION|${AGENT_VERSION}|g' redhat-certification/sysdig-operator.v${VERSION}.clusterserviceversion.yaml
-	sed -i 's|REPLACE_VERSION|${VERSION}|g' redhat-certification/sysdig.package.yaml
+	sed -i 's|REPLACE_VERSION|${VERSION}|g' redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
+	sed -i 's|REPLACE_IMAGE|${CERTIFIED_IMAGE}|g' redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
+	sed -i 's|REPLACE_FALCO_IMAGE|${CERTIFIED_FALCO_IMAGE}|g' redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
+	sed -i 's|REPLACE_FALCO_VERSION|${FALCO_VERSION}|g' redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
+	sed -i 's|REPLACE_VERSION|${VERSION}|g' redhat-certification/falco.package.yaml
 	\
 	zip -j redhat-certification-metadata-${VERSION}.zip \
-		redhat-certification/sysdig-operator.v${VERSION}.clusterserviceversion.yaml \
-		redhat-certification/sysdig.crd.yaml \
-		redhat-certification/sysdig.package.yaml
+		redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml \
+		redhat-certification/falco.crd.yaml \
+		redhat-certification/falco.package.yaml
 	\
-	rm	redhat-certification/sysdig.crd.yaml \
-		redhat-certification/sysdig-operator.v${VERSION}.clusterserviceversion.yaml
+	rm	redhat-certification/falco.crd.yaml \
+		redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
 	\
 	git checkout redhat-certification
