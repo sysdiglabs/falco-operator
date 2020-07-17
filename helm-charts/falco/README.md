@@ -69,11 +69,12 @@ The following table lists the configurable parameters of the Falco chart and the
 | `rbac.create`                                   | If true, create & use RBAC resources                                                                               | `true`                                                                                                                                    |
 | `serviceAccount.create`                         | Create serviceAccount                                                                                              | `true`                                                                                                                                    |
 | `serviceAccount.name`                           | Use this value as serviceAccountName                                                                               | ` `                                                                                                                                       |
-| `fakeEventGenerator.enabled`                    | Run falco-event-generator for sample events                                                                        | `false`                                                                                                                                   |
-| `fakeEventGenerator.replicas`                   | How many replicas of falco-event-generator to run                                                                  | `1`                                                                                                                                       |
+| `fakeEventGenerator.enabled`                    | Run [falcosecurity/event-generator](https://github.com/falcosecurity/event-generator) for sample events            | `false`
+| `fakeEventGenerator.args`                       | Arguments for `falcosecurity/event-generator`                                                                       | `run --loop ^syscall`                                                                                                                                   |
+| `fakeEventGenerator.replicas`                   | How many replicas of `falcosecurity/event-generator` to run                                                                  | `1`                                                                                                                                       |
 | `daemonset.updateStrategy.type`                 | The updateStrategy for updating the daemonset                                                                      | `RollingUpdate`                                                                                                                           |
 | `daemonset.env`                                 | Extra environment variables passed to daemonset pods                                                               | `{}`                                                                                                                                      |
-| `daemonset.podAnnotations`                                 | Extra pod annotations to be added to pods created by the daemonset                                                               | `{}`                                                                                                                                      |
+| `daemonset.podAnnotations`                      | Extra pod annotations to be added to pods created by the daemonset                                                 | `{}`                                                                                                                                      |
 | `podSecurityPolicy.create`                      | If true, create & use podSecurityPolicy                                                                            | `false`                                                                                                                                   |
 | `proxy.httpProxy`                               | Set the Proxy server if is behind a firewall                                                                       | ` `                                                                                                                                       |
 | `proxy.httpsProxy`                              | Set the Proxy server if is behind a firewall                                                                       | ` `                                                                                                                                       |
@@ -112,20 +113,21 @@ The following table lists the configurable parameters of the Falco chart and the
 | `falco.programOutput.program`                   | Command to execute for program output                                                                              | `mail -s "Falco Notification" someone@example.com`                                                                                        |
 | `falco.httpOutput.enabled`                      | Enable http output for security notifications                                                                      | `false`                                                                                                                                   |
 | `falco.httpOutput.url`                          | Url to notify using the http output when a notification arrives                                                    | `http://some.url`                                                                                                                         |
-| `falco.grpc.enabled`                            | Enable the Falco gRPC server                                                          | `false`  
-| `falco.grpc.listenPort`                        | Port where Falco gRPC server listen to connections                        | `5060` 
-| `falco.grpc.threadiness`                        | Number of threads (and context) the gRPC server will use                              | `8` 
-| `falco.grpc.privateKey`                         | Key file path for the Falco gRPC server                                               | `/etc/falco/certs/server.key` 
-| `falco.grpc.certChain`                          | Cert file path for the Falco gRPC server                                              | `/etc/falco/certs/server.crt` 
-| `falco.grpc.rootCerts`                          | CA root file path for the Falco gRPC server                                           | `/etc/falco/certs/ca.crt`
-| `falco.grpcOutput.enabled`                      | Enable the gRPC output and events will be kept in memory until you read them with a gRPC client.                                                    | `false`                                                                                                                         |
+| `falco.grpc.enabled`                            | Enable the Falco gRPC server                                                                                       | `false`                                                                                                                                   |
+| `falco.grpc.threadiness`                        | Number of threads (and context) the gRPC server will use, `0` by default, which means "auto"                                                           | `0`                                                                                                                                       |
+| `falco.grpc.unixSocketPath`                     | Unix socket the gRPC server will create                                                                            | `unix:///var/run/falco/falco.sock`                                                                                                        |
+| `falco.grpc.listenPort`                         | Port where Falco gRPC server listen to connections                                                                 | `5060`                                                                                                                                    |
+| `falco.grpc.privateKey`                         | Key file path for the Falco gRPC server                                                                            | `/etc/falco/certs/server.key`                                                                                                             |
+| `falco.grpc.certChain`                          | Cert file path for the Falco gRPC server                                                                           | `/etc/falco/certs/server.crt`                                                                                                             |
+| `falco.grpc.rootCerts`                          | CA root file path for the Falco gRPC server                                                                        | `/etc/falco/certs/ca.crt`                                                                                                                 |
+| `falco.grpcOutput.enabled`                      | Enable the gRPC output and events will be kept in memory until you read them with a gRPC client.                   | `false`                                                                                                                                   |
 | `customRules`                                   | Third party rules enabled for Falco                                                                                | `{}`                                                                                                                                      |
 | `integrations.gcscc.enabled`                    | Enable Google Cloud Security Command Center integration                                                            | `false`                                                                                                                                   |
 | `integrations.gcscc.webhookUrl`                 | The URL where sysdig-gcscc-connector webhook is listening                                                          | `http://sysdig-gcscc-connector.default.svc.cluster.local:8080/events`                                                                     |
 | `integrations.gcscc.webhookAuthenticationToken` | Token used for authentication and webhook                                                                          | `b27511f86e911f20b9e0f9c8104b4ec4`                                                                                                        |
 | `integrations.natsOutput.enabled`               | Enable NATS Output integration                                                                                     | `false`                                                                                                                                   |
 | `integrations.natsOutput.natsUrl`               | The NATS' URL where Falco is going to publish security alerts                                                      | `nats://nats.nats-io.svc.cluster.local:4222`                                                                                              |
-| `integrations.pubsubOutput.credentialsData`     | Contents retrieved from `cat $HOME/.config/gcloud/legacy_credentials/<email>/adc.json                              | ` `                                                                                                                                       |
+| `integrations.pubsubOutput.credentialsData`     | Contents retrieved from `cat $HOME/.config/gcloud/legacy_credentials/<email>/adc.json`                             | ` `                                                                                                                                       |
 | `integrations.pubsubOutput.enabled`             | Enable GCloud PubSub Output Integration                                                                            | `false`                                                                                                                                   |
 | `integrations.pubsubOutput.projectID`           | GCloud Project ID where the Pub/Sub will be created                                                                | ` `                                                                                                                                       |
 | `integrations.snsOutput.enabled`                | Enable Amazon SNS Output integration                                                                               | `false`                                                                                                                                   |
@@ -257,7 +259,7 @@ APISERVER_HOST=api.my-kops-cluster.com bash ./enable-k8s-audit.sh kops dynamic
 Then you can install Falco chart enabling the enabling the `falco.webserver`
 flag:
 
-`helm install falco --set falco.auditLog.enabled=true --set falco.auditLog.dynamicBackend.enabled=true falcosecurity/falco`
+`helm install falco --set auditLog.enabled=true --set auditLog.dynamicBackend.enabled=true falcosecurity/falco`
 
 And that's it, you will start to see the K8s audit log related alerts.
 
@@ -266,7 +268,7 @@ And that's it, you will start to see the K8s audit log related alerts.
 Perhaps you may find the case where you receive an error like the following one:
 
 ```
-helm install falco --set falco.auditLog.enabled=true falcosecurity/falco
+helm install falco --set auditLog.enabled=true falcosecurity/falco
 Error: validation failed: unable to recognize "": no matches for kind "AuditSink" in version "auditregistration.k8s.io/v1alpha1"
 ```
 
@@ -275,20 +277,42 @@ resource, which means that the dynamic auditing feature hasn't been enabled
 properly. You need to enable it or ensure that your using a Kubernetes version
 greater than v1.13.
 
-## Enabling gRPC service
+## Enabling gRPC
 
 The Falco gRPC server and the Falco gRPC Outputs APIs are not enabled by default.
+Morover, Falco supports running a gRPC server with two main binding types:
+- Over a local **unix socket** with no authentication 
+- Over the **network** with mandatory mutual TLS authentication (mTLS)
 
-The gRPC server can only be used with mutual authentication between the clients and the server using TLS certificates. How to generate the certificates is [documented here](https://falco.org/docs/grpc/#generate-valid-ca).
+> **Tip**: Once gRPC is enabled, you can deploy [falco-exporter](https://github.com/falcosecurity/falco-exporter) to export metrics to Prometheus.
 
-To install Falco with gRPC enabled, you have to:
+### gRPC over unix socket (default)
 
-```
+The preferred way to use the gRPC is over a unix socket.
+
+To install Falco with gRPC enabled over a **unix socket**, you have to:
+
+```shell
 helm install falco \
   --set falco.grpc.enabled=true \
   --set falco.grpcOutput.enabled=true \
+  falcosecurity/falco
+```
+
+### gRPC over network
+
+The gRPC server over the network can only be used with mutual authentication between the clients and the server using TLS certificates. 
+How to generate the certificates is [documented here](https://falco.org/docs/grpc/#generate-valid-ca).
+
+To install Falco with gRPC enabled over the **network**, you have to:
+
+```shell
+helm install falco \
+  --set falco.grpc.enabled=true \
+  --set falco.grpcOutput.enabled=true \
+  --set falco.grpc.unixSocketPath="" \
   --set-file certs.server.key=/path/to/server.key \
-  --set-file certs.server.crt=/path/to/certs/server.crt \
+  --set-file certs.server.crt=/path/to/server.crt \
   --set-file certs.ca.crt=/path/to/ca.crt \
-   falcosecurity/falco
+  falcosecurity/falco
 ```
