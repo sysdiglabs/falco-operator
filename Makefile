@@ -46,12 +46,12 @@ package-redhat:
 	sed -i 's|REPLACE_IMAGE|${CERTIFIED_IMAGE}|g' redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
 	sed -i 's|REPLACE_FALCO_IMAGE|${CERTIFIED_FALCO_IMAGE}|g' redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
 	sed -i 's|REPLACE_FALCO_VERSION|${FALCO_VERSION}|g' redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
-	sed -i 's|REPLACE_VERSION|${VERSION}|g' redhat-certification/falco.package.yaml
+	sed -i 's|REPLACE_VERSION|${VERSION}|g' redhat-certification/falco-operator.package.yaml
 	\
 	zip -j redhat-certification-metadata-${VERSION}.zip \
 		redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml \
 		redhat-certification/falco.crd.yaml \
-		redhat-certification/falco.package.yaml
+		redhat-certification/falco-operator.package.yaml
 	\
 	rm	redhat-certification/falco.crd.yaml \
 		redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml

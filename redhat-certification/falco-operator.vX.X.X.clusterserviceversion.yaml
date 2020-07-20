@@ -190,7 +190,6 @@ spec:
           strategy: {}
           template:
             metadata:
-              creationTimestamp: null
               labels:
                 name: falco-operator
             spec:

@@ -1,4 +1,0 @@
-packageName: falco-certified
-channels:
-- name: stable
-  currentCSV: falco-operator.vREPLACE_VERSION
