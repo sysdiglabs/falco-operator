@@ -14,14 +14,16 @@ metadata:
     support: Sysdig, Inc.
     repository: https://github.com/sysdiglabs/falco-operator/
     alm-examples: |-
-      [{
-        "apiVersion": "falco.org/v1",
-        "kind": "Falco",
-        "metadata": {
-          "name": "falco",
-        },
-        "spec": {}
-      }]
+      [
+        {
+          "apiVersion": "falco.org/v1",
+          "kind": "Falco",
+          "metadata": {
+            "name": "example-falco"
+          },
+          "spec": {}
+        }
+      ]
 spec:
   apiservicedefinitions: {}
   customresourcedefinitions:
@@ -48,7 +50,7 @@ spec:
     | ---                                             | ---                                                                                                                                                                                                        | ---                                                                                                                                       |
     | `image.registry`                                | The image registry to pull from                                                                                                                                                                            | `docker.io`                                                                                                                               |
     | `image.repository`                              | The image repository to pull from                                                                                                                                                                          | `falcosecurity/falco`                                                                                                                     |
-    | `image.tag`                                     | The image tag to pull                                                                                                                                                                                      | `0.23.0`                                                                                                                                  |
+    | `image.tag`                                     | The image tag to pull                                                                                                                                                                                      | `0.24.0`                                                                                                                                  |
     | `image.pullPolicy`                              | The image pull policy                                                                                                                                                                                      | `IfNotPresent`                                                                                                                            |
     | `containerd.enabled`                            | Enable ContainerD support                                                                                                                                                                                  | `true`                                                                                                                                    |
     | `containerd.socket`                             | The path of the ContainerD socket                                                                                                                                                                          | `/run/containerd/containerd.sock`                                                                                                         |

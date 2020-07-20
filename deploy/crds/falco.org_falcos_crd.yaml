@@ -10,6 +10,7 @@ spec:
     plural: falcos
     singular: falco
   scope: Namespaced
+  version: v1
   versions:
   - name: v1
     schema:
