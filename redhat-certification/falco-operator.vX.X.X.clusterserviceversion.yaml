@@ -133,8 +133,7 @@ spec:
     | `affinity`                                      | The affinity constraint                                                                                                                                                                                    | `{}`                                                                                                                                      |
     | `tolerations`                                   | The tolerations for scheduling                                                                                                                                                                             | `node-role.kubernetes.io/master:NoSchedule`                                                                                               |
 
-    For example, if you want to deploy a DaemonSet with eBPF and with Sysdig Secure
-    enabled:
+    For example, if you want to deploy a DaemonSet with eBPF enabled:
 
     ```yaml
     apiVersion: falco.org/v1
