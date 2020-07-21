@@ -1,4 +1,4 @@
-IMAGE = nestorsalceda/falco-operator
+IMAGE = sysdiglabs/falco-operator
 # Use same version than helm chart
 PREVIOUS_VERSION = $(shell ls -d deploy/olm-catalog/sysdig-operator/*/ -t | head -n1 | cut -d"/" -f4)
 VERSION = 1.2.0
