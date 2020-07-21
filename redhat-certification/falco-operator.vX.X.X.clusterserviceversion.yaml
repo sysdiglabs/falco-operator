@@ -26,6 +26,7 @@ metadata:
       ]
 spec:
   apiservicedefinitions: {}
+  maturity: stable
   customresourcedefinitions:
     owned:
     - kind: Falco
@@ -208,9 +209,6 @@ spec:
                 image: REPLACE_IMAGE:REPLACE_VERSION
                 imagePullPolicy: Always
                 name: falco-operator
-                ports:
-                - containerPort: 60000
-                  name: metrics
                 resources: {}
               serviceAccountName: falco-operator
     strategy: deployment

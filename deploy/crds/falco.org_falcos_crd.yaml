@@ -10,6 +10,12 @@ spec:
     plural: falcos
     singular: falco
   scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      type: object
+      x-kubernetes-preserve-unknown-fields: true
   version: v1
   versions:
   - name: v1
@@ -19,5 +25,3 @@ spec:
         x-kubernetes-preserve-unknown-fields: true
     served: true
     storage: true
-    subresources:
-      status: {}
