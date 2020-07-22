@@ -10,17 +10,13 @@ spec:
     plural: falcos
     singular: falco
   scope: Namespaced
+  subresources:
+    status: {}
   version: v1
   versions:
   - name: v1
-    schema:
-      openAPIV3Schema:
-        type: object
-        x-kubernetes-preserve-unknown-fields: true
     served: true
     storage: true
-    subresources:
-      status: {}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -58,7 +54,7 @@ spec:
       containers:
         - name: falco-operator
           # Replace this with the built image name
-          image: docker.io/nestorsalceda/falco-operator:1.2.0
+          image: docker.io/sysdiglabs/falco-operator:1.2.0
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
