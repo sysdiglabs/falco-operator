@@ -3,3 +3,7 @@
   version: v1
   kind: Falco
   chart: helm-charts/falco
+- group: falco.org
+  version: v1
+  kind: FalcoExporter
+  chart: helm-charts/falco-exporter

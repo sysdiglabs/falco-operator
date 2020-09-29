@@ -2,4 +2,8 @@ apiVersion: falco.org/v1
 kind: Falco
 metadata:
   name: example-falco
-spec: {}
+spec:
+  grpc:
+    enabled: true
+  grpcOutput:
+    enabled: true
