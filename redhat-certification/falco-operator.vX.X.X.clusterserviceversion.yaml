@@ -34,6 +34,11 @@ spec:
       description: Represents a Falco Agent running on each node of your cluster.
       name: falcos.falco.org
       version: v1
+    - kind: FalcoExporter
+      displayName: Falco Exporter daemonSet
+      description: Represents a Falco Prometheus exporter running on each node of your cluster.
+      name: falcoexporters.falco.org
+      version: v1
   description: |-
     [Falco](https://falco.org) is a behavioral activity monitor designed to
     detect anomalous activity in your applications. You can use Falco to
