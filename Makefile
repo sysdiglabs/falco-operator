@@ -1,11 +1,11 @@
 IMAGE = sysdiglabs/falco-operator
 # Use same version than helm chart
-PREVIOUS_VERSION = $(shell ls -d deploy/olm-catalog/sysdig-operator/*/ -t | head -n1 | cut -d"/" -f4)
-VERSION = 1.2.0
+PREVIOUS_VERSION = $(shell ls -d deploy/olm-catalog/falco-operator/*/ -t | head -n1 | cut -d"/" -f4)
+VERSION = 1.4.0
 CERTIFIED_IMAGE = registry.connect.redhat.com/sysdig/falco-operator
 
 CERTIFIED_FALCO_IMAGE = docker.io/falcosecurity/falco
-FALCO_VERSION = 0.24.0
+FALCO_VERSION = 0.25.0
 
 .PHONY: build bundle.yaml
 

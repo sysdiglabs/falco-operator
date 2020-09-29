@@ -1,4 +1,4 @@
-FROM quay.io/operator-framework/helm-operator:v0.18.2
+FROM quay.io/operator-framework/helm-operator:v0.19.2
 
 LABEL name="falco-operator"
 LABEL summary="The Falco Project is an open source runtime security tool."
