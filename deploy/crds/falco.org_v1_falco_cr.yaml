@@ -3,7 +3,8 @@ kind: Falco
 metadata:
   name: example-falco
 spec:
-  grpc:
-    enabled: true
-  grpcOutput:
-    enabled: true
+  falco:
+    grpc:
+      enabled: true
+    grpcOutput:
+      enabled: true
