@@ -47,6 +47,7 @@ e2e-clean: bundle.yaml
 
 package-redhat:
 	cp deploy/crds/falco.org_falcos_crd.yaml redhat-certification/falco.crd.yaml
+	cp deploy/crds/falco.org_falcoexporters_crd.yaml redhat-certification/falco-exporter.crd.yaml
 	cp redhat-certification/falco-operator.vX.X.X.clusterserviceversion.yaml redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
 	\
 	sed -i 's|REPLACE_VERSION|${VERSION}|g' redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
@@ -58,9 +59,11 @@ package-redhat:
 	zip -j redhat-certification-metadata-${VERSION}.zip \
 		redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml \
 		redhat-certification/falco.crd.yaml \
+		redhat-certification/falco-exporter.crd.yaml \
 		redhat-certification/falco-operator.package.yaml
 	\
 	rm	redhat-certification/falco.crd.yaml \
+		redhat-certification/falco-exporter.crd.yaml \
 		redhat-certification/falco-operator.v${VERSION}.clusterserviceversion.yaml
 	\
 	git checkout redhat-certification
