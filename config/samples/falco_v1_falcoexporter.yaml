@@ -1,0 +1,48 @@
+apiVersion: falco.org/v1
+kind: FalcoExporter
+metadata:
+  name: falcoexporter-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/falco-exporter/values.yaml
+  affinity: {}
+  falco:
+    grpcTimeout: 2m
+    grpcUnixSocketPath: unix:///var/run/falco/falco.sock
+  fullnameOverride: ""
+  grafanaDashboard:
+    enabled: false
+    namespace: default
+  image:
+    pullPolicy: IfNotPresent
+    repository: falcosecurity/falco-exporter
+    tag: 0.3.0
+  imagePullSecrets: []
+  nameOverride: ""
+  nodeSelector: {}
+  podSecurityContext: {}
+  resources: {}
+  securityContext: {}
+  service:
+    annotations:
+      prometheus.io/port: "9376"
+      prometheus.io/scrape: "true"
+    clusterIP: None
+    labels: {}
+    nodePort: null
+    port: 9376
+    targetPort: 9376
+    type: ClusterIP
+  serviceAccount:
+    annotations: {}
+    create: true
+    name: null
+  serviceMonitor:
+    additionalLabels: {}
+    enabled: false
+    interval: ""
+    scrapeTimeout: ""
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+  
+  

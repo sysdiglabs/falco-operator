@@ -1,5 +1,0 @@
-apiVersion: falco.org/v1
-kind: FalcoExporter
-metadata:
-  name: example-falco-exporter
-spec: {}

@@ -1,0 +1,20 @@
+# permissions for end users to view falcoexporters.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: falcoexporter-viewer-role
+rules:
+- apiGroups:
+  - falco.org
+  resources:
+  - falcoexporters
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - falco.org
+  resources:
+  - falcoexporters/status
+  verbs:
+  - get
