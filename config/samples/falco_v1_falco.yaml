@@ -43,14 +43,14 @@ spec:
       keepAlive: false
     grpc:
       certChain: /etc/falco/certs/server.crt
-      enabled: false
+      enabled: true
       listenPort: 5060
       privateKey: /etc/falco/certs/server.key
       rootCerts: /etc/falco/certs/ca.crt
       threadiness: 0
       unixSocketPath: unix:///var/run/falco/falco.sock
     grpcOutput:
-      enabled: false
+      enabled: true
     httpOutput:
       enabled: false
       url: http://some.url
@@ -138,5 +138,5 @@ spec:
   tolerations:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
-  
-  
+
+
