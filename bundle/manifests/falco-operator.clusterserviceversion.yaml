@@ -417,7 +417,7 @@ spec:
                 - --metrics-addr=127.0.0.1:8080
                 - --enable-leader-election
                 - --leader-election-id=falco-operator
-                image: docker.io/nestorsalceda/falco-operator:1.4.0
+                image: registry.connect.redhat.com/sysdig/falco-operator:1.4.0-1
                 name: manager
                 resources:
                   limits:
