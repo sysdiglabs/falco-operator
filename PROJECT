@@ -5,4 +5,7 @@ resources:
 - group: falco
   kind: Falco
   version: v1
+- group: falco
+  kind: FalcoExporter
+  version: v1
 version: 3-alpha

@@ -3,4 +3,5 @@
 # It should be run by config/default
 resources:
 - bases/falco.org_falcos.yaml
+- bases/falco.org_falcoexporters.yaml
 # +kubebuilder:scaffold:crdkustomizeresource
