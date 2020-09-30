@@ -2,17 +2,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
   annotations:
-    alm-examples: |-
-      [
-        {
-          "apiVersion": "falco.org/v1",
-          "kind": "Falco",
-          "metadata": {
-            "name": "example-falco"
-          },
-          "spec": {}
-        }
-      ]
+    alm-examples: '[]'
     capabilities: Basic Install
     operators.operatorframework.io/builder: operator-sdk-v1.0.1
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
