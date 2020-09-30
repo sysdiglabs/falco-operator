@@ -2,7 +2,251 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
   annotations:
-    alm-examples: '[]'
+    alm-examples: |-
+      [
+        {
+          "apiVersion": "falco.org/v1",
+          "kind": "Falco",
+          "metadata": {
+            "name": "falco-sample"
+          },
+          "spec": {
+            "affinity": {},
+            "auditLog": {
+              "dynamicBackend": {
+                "enabled": false,
+                "url": ""
+              },
+              "enabled": false
+            },
+            "containerd": {
+              "enabled": true,
+              "socket": "/run/containerd/containerd.sock"
+            },
+            "customRules": {},
+            "daemonset": {
+              "env": {},
+              "podAnnotations": {},
+              "updateStrategy": {
+                "type": "RollingUpdate"
+              }
+            },
+            "docker": {
+              "enabled": true,
+              "socket": "/var/run/docker.sock"
+            },
+            "ebpf": {
+              "enabled": false,
+              "settings": {
+                "hostNetwork": true
+              }
+            },
+            "extraArgs": [],
+            "extraInitContainers": [],
+            "fakeEventGenerator": {
+              "args": [
+                "run",
+                "--loop",
+                "^syscall"
+              ],
+              "enabled": false,
+              "replicas": 1
+            },
+            "falco": {
+              "bufferedOutputs": false,
+              "fileOutput": {
+                "enabled": false,
+                "filename": "./events.txt",
+                "keepAlive": false
+              },
+              "grpc": {
+                "certChain": "/etc/falco/certs/server.crt",
+                "enabled": true,
+                "listenPort": 5060,
+                "privateKey": "/etc/falco/certs/server.key",
+                "rootCerts": "/etc/falco/certs/ca.crt",
+                "threadiness": 0,
+                "unixSocketPath": "unix:///var/run/falco/falco.sock"
+              },
+              "grpcOutput": {
+                "enabled": true
+              },
+              "httpOutput": {
+                "enabled": false,
+                "url": "http://some.url"
+              },
+              "jsonIncludeOutputProperty": true,
+              "jsonOutput": false,
+              "logLevel": "info",
+              "logStderr": true,
+              "logSyslog": true,
+              "outputs": {
+                "maxBurst": 1000,
+                "rate": 1
+              },
+              "priority": "debug",
+              "programOutput": {
+                "enabled": false,
+                "keepAlive": false,
+                "program": "mail -s \"Falco Notification\" someone@example.com"
+              },
+              "rulesFile": [
+                "/etc/falco/falco_rules.yaml",
+                "/etc/falco/falco_rules.local.yaml",
+                "/etc/falco/k8s_audit_rules.yaml",
+                "/etc/falco/rules.d"
+              ],
+              "stdoutOutput": {
+                "enabled": true
+              },
+              "syscallEventDrops": {
+                "actions": [
+                  "log",
+                  "alert"
+                ],
+                "maxBurst": 10,
+                "rate": 0.03333
+              },
+              "syslogOutput": {
+                "enabled": true
+              },
+              "timeFormatISO8601": false,
+              "webserver": {
+                "enabled": true,
+                "k8sAuditEndpoint": "/k8s-audit",
+                "listenPort": 8765
+              }
+            },
+            "image": {
+              "pullPolicy": "IfNotPresent",
+              "pullSecrets": [],
+              "registry": "docker.io",
+              "repository": "falcosecurity/falco",
+              "tag": "0.25.0"
+            },
+            "integrations": {
+              "gcscc": {
+                "enabled": false,
+                "webhookAuthenticationToken": "b27511f86e911f20b9e0f9c8104b4ec4",
+                "webhookUrl": "http://sysdig-gcscc-connector.default.svc.cluster.local:8080/events"
+              },
+              "natsOutput": {
+                "enabled": false,
+                "natsUrl": "nats://nats.nats-io.svc.cluster.local:4222"
+              },
+              "pubsubOutput": {
+                "credentialsData": "",
+                "enabled": false,
+                "projectID": "",
+                "topic": ""
+              },
+              "snsOutput": {
+                "aws_access_key_id": "",
+                "aws_default_region": "",
+                "aws_secret_access_key": "",
+                "enabled": false,
+                "topic": ""
+              }
+            },
+            "nodeSelector": {},
+            "podSecurityPolicy": {
+              "create": false
+            },
+            "priorityClassName": null,
+            "proxy": {
+              "httpProxy": null,
+              "httpsProxy": null,
+              "noProxy": null
+            },
+            "rbac": {
+              "create": true
+            },
+            "resources": {
+              "limits": {
+                "cpu": "200m",
+                "memory": "1024Mi"
+              },
+              "requests": {
+                "cpu": "100m",
+                "memory": "512Mi"
+              }
+            },
+            "scc": {
+              "create": true
+            },
+            "serviceAccount": {
+              "create": true,
+              "name": null
+            },
+            "timezone": null,
+            "tolerations": [
+              {
+                "effect": "NoSchedule",
+                "key": "node-role.kubernetes.io/master"
+              }
+            ]
+          }
+        },
+        {
+          "apiVersion": "falco.org/v1",
+          "kind": "FalcoExporter",
+          "metadata": {
+            "name": "falcoexporter-sample"
+          },
+          "spec": {
+            "affinity": {},
+            "falco": {
+              "grpcTimeout": "2m",
+              "grpcUnixSocketPath": "unix:///var/run/falco/falco.sock"
+            },
+            "fullnameOverride": "",
+            "grafanaDashboard": {
+              "enabled": false,
+              "namespace": "default"
+            },
+            "image": {
+              "pullPolicy": "IfNotPresent",
+              "repository": "falcosecurity/falco-exporter",
+              "tag": "0.3.0"
+            },
+            "imagePullSecrets": [],
+            "nameOverride": "",
+            "nodeSelector": {},
+            "podSecurityContext": {},
+            "resources": {},
+            "securityContext": {},
+            "service": {
+              "annotations": {
+                "prometheus.io/port": "9376",
+                "prometheus.io/scrape": "true"
+              },
+              "clusterIP": "None",
+              "labels": {},
+              "nodePort": null,
+              "port": 9376,
+              "targetPort": 9376,
+              "type": "ClusterIP"
+            },
+            "serviceAccount": {
+              "annotations": {},
+              "create": true,
+              "name": null
+            },
+            "serviceMonitor": {
+              "additionalLabels": {},
+              "enabled": false,
+              "interval": "",
+              "scrapeTimeout": ""
+            },
+            "tolerations": [
+              {
+                "effect": "NoSchedule",
+                "key": "node-role.kubernetes.io/master"
+              }
+            ]
+          }
+        }
+      ]
     capabilities: Basic Install
     operators.operatorframework.io/builder: operator-sdk-v1.0.1
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
@@ -10,7 +254,18 @@ metadata:
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
-  customresourcedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - description: Represents a Falco Prometheus exporter running on each node of your cluster.
+      displayName: Falco Exporter daemonSet
+      kind: FalcoExporter
+      name: falcoexporters.falco.org
+      version: v1
+    - description: Represents a Falco Agent running on each node of your cluster.
+      displayName: Falco daemonSet
+      kind: Falco
+      name: falcos.falco.org
+      version: v1
   description: |-
     [Falco](https://falco.org) is a behavioral activity monitor designed to
     detect anomalous activity in your applications. You can use Falco to
@@ -123,7 +378,88 @@ spec:
     mediatype: image/png
   install:
     spec:
-      deployments: []
+      clusterPermissions:
+      - rules:
+        - apiGroups:
+          - '*'
+          resources:
+          - '*'
+          verbs:
+          - '*'
+        - apiGroups:
+          - authentication.k8s.io
+          resources:
+          - tokenreviews
+          verbs:
+          - create
+        - apiGroups:
+          - authorization.k8s.io
+          resources:
+          - subjectaccessreviews
+          verbs:
+          - create
+        serviceAccountName: default
+      deployments:
+      - name: falco-operator-controller-manager
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              control-plane: controller-manager
+          strategy: {}
+          template:
+            metadata:
+              labels:
+                control-plane: controller-manager
+            spec:
+              containers:
+              - args:
+                - --metrics-addr=127.0.0.1:8080
+                - --enable-leader-election
+                - --leader-election-id=falco-operator
+                image: docker.io/nestorsalceda/falco-operator:1.4.0
+                name: manager
+                resources:
+                  limits:
+                    cpu: 100m
+                    memory: 90Mi
+                  requests:
+                    cpu: 100m
+                    memory: 60Mi
+              - args:
+                - --secure-listen-address=0.0.0.0:8443
+                - --upstream=http://127.0.0.1:8080/
+                - --logtostderr=true
+                - --v=10
+                image: gcr.io/kubebuilder/kube-rbac-proxy:v0.5.0
+                name: kube-rbac-proxy
+                ports:
+                - containerPort: 8443
+                  name: https
+                resources: {}
+              terminationGracePeriodSeconds: 10
+      permissions:
+      - rules:
+        - apiGroups:
+          - ""
+          resources:
+          - configmaps
+          verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+        - apiGroups:
+          - ""
+          resources:
+          - events
+          verbs:
+          - create
+          - patch
+        serviceAccountName: default
     strategy: deployment
   installModes:
   - supported: true
