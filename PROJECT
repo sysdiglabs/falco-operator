@@ -1,0 +1,8 @@
+domain: org
+layout: helm.sdk.operatorframework.io/v1
+projectName: falco-operator
+resources:
+- group: falco
+  kind: Falco
+  version: v1
+version: 3-alpha
