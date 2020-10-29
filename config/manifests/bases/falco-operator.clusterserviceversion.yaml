@@ -3,7 +3,14 @@ kind: ClusterServiceVersion
 metadata:
   annotations:
     alm-examples: '[]'
-    capabilities: Basic Install
+    capabilities: Seamless Upgrades
+    categories: Security
+    description: The Falco Project is an open source runtime security tool
+    cointainerImage: registry.connect.redhat.com/sysdig/falco-operator
+    createdAt: 2020-07-07T18:30:00Z
+    support: Sysdig, Inc.
+    certified: true
+    repository: https://github.com/sysdiglabs/falco-operator
     operators.operatorframework.io/builder: operator-sdk-v1.0.1
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
   name: falco-operator.vX.Y.Z
@@ -167,5 +174,4 @@ spec:
   maturity: stable
   provider:
     name: Sysdig
-    url: https://sysdig.com
   version: 0.0.0
