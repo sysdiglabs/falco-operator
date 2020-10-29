@@ -247,10 +247,17 @@ metadata:
           }
         }
       ]
-    capabilities: Basic Install
-    operators.operatorframework.io/builder: operator-sdk-v1.0.1
+    capabilities: Seamless Upgrades
+    categories: Security
+    certified: "true"
+    cointainerImage: registry.connect.redhat.com/sysdig/falco-operator
+    createdAt: "2020-07-07T18:30:00Z"
+    description: The Falco Project is an open source runtime security tool
+    operators.operatorframework.io/builder: operator-sdk-v1.1.0
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
-  name: falco-operator.v1.4.0-1
+    repository: https://github.com/sysdiglabs/falco-operator
+    support: Sysdig, Inc.
+  name: falco-operator.v1.4.0-4
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -414,19 +421,6 @@ spec:
             spec:
               containers:
               - args:
-                - --metrics-addr=127.0.0.1:8080
-                - --enable-leader-election
-                - --leader-election-id=falco-operator
-                image: registry.connect.redhat.com/sysdig/falco-operator:1.4.0-1
-                name: manager
-                resources:
-                  limits:
-                    cpu: 100m
-                    memory: 90Mi
-                  requests:
-                    cpu: 100m
-                    memory: 60Mi
-              - args:
                 - --secure-listen-address=0.0.0.0:8443
                 - --upstream=http://127.0.0.1:8080/
                 - --logtostderr=true
@@ -437,6 +431,19 @@ spec:
                 - containerPort: 8443
                   name: https
                 resources: {}
+              - args:
+                - --metrics-addr=127.0.0.1:8080
+                - --enable-leader-election
+                - --leader-election-id=falco-operator
+                image: registry.connect.redhat.com/sysdig/falco-operator:1.4.0-4
+                name: manager
+                resources:
+                  limits:
+                    cpu: 100m
+                    memory: 90Mi
+                  requests:
+                    cpu: 100m
+                    memory: 60Mi
               terminationGracePeriodSeconds: 10
       permissions:
       - rules:
@@ -492,5 +499,4 @@ spec:
   maturity: stable
   provider:
     name: Sysdig
-    url: https://sysdig.com
-  version: 1.4.0-1
+  version: 1.4.0-4
