@@ -1,5 +1,5 @@
 channels:
-- currentCSV: falco-operator.v1.4.0-1
+- currentCSV: falco-operator.v1.4.0-4
   name: stable
 defaultChannel: stable
 packageName: falco-operator
