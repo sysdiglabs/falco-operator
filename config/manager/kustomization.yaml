@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: registry.connect.redhat.com/sysdig/falco-operator
-  newTag: 1.4.0-1
+  newTag: 1.4.0-4

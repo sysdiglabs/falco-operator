@@ -5,14 +5,14 @@ metadata:
     alm-examples: '[]'
     capabilities: Seamless Upgrades
     categories: Security
-    description: The Falco Project is an open source runtime security tool
+    certified: "true"
     cointainerImage: registry.connect.redhat.com/sysdig/falco-operator
-    createdAt: 2020-07-07T18:30:00Z
-    support: Sysdig, Inc.
-    certified: true
-    repository: https://github.com/sysdiglabs/falco-operator
-    operators.operatorframework.io/builder: operator-sdk-v1.0.1
+    createdAt: "2020-07-07T18:30:00Z"
+    description: The Falco Project is an open source runtime security tool
+    operators.operatorframework.io/builder: operator-sdk-v1.1.0
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
+    repository: https://github.com/sysdiglabs/falco-operator
+    support: Sysdig, Inc.
   name: falco-operator.vX.Y.Z
   namespace: placeholder
 spec:
